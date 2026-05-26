@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI & CS Interview Strategy Guide</title>
+    <style>
+        /* Inherited Lab59 Design System */
+        :root {
+            --color-background: #fcfcf9;
+            --color-surface: #fffffe;
+            --color-text: #2258a5;
+            --color-text-secondary: #1668bd;
+            --color-primary: #2258a5;
+            --color-primary-hover: #ffb318;
+            --color-border: rgba(94, 82, 64, 0.2);
+            --color-success: #0e7c4a;
+            --color-warning: #a84b2f;
+            --color-error: #c0152f;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.06);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--color-background);
+            color: var(--color-text);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-top: 20px;
+        }
+
+        h1 {
+            font-size: 32px;
+            margin-bottom: 12px;
+            color: var(--color-text);
+        }
+
+        .subtitle {
+            font-size: 18px;
+            color: var(--color-text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .dynamic-greeting {
+            display: inline-block;
+            background: rgba(33, 128, 141, 0.1);
+            color: var(--color-primary);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Q&A Card Styling */
+        .qa-card {
+            background: var(--color-surface);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 24px;
+            border-left: 4px solid var(--color-border);
+            transition: all 0.3s ease;
+        }
+
+        .qa-card:hover {
+            border-left-color: var(--color-primary);
+        }
+
+        .question {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--color-text);
+        }
+
+        .reveal-btn {
+            background: transparent;
+            color: var(--color-primary);
+            border: 2px solid var(--color-primary);
+            padding: 10px 24px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-bottom: 16px;
+        }
+
+        .reveal-btn:hover {
+            background: var(--color-primary);
+            color: white;
+        }
+
+        .answers-container {
+            display: none; /* Hidden by default */
+            margin-top: 20px;
+            border-top: 1px solid var(--color-border);
+            padding-top: 20px;
+        }
+
+        .answers-container.show {
+            display: block;
+        }
+
+        .textbook-answer {
+            background: #f5f5f5;
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            color: #555;
+            font-size: 14px;
+            border-left: 3px solid #999;
+        }
+
+        .lab59-answer {
+            background: rgba(33, 128, 141, 0.05);
+            padding: 20px;
+            border-radius: 8px;
+            color: var(--color-text);
+            border-left: 3px solid var(--color-primary);
+        }
+
+        .answer-label {
+            display: block;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .textbook-answer .answer-label { color: #777; }
+        .lab59-answer .answer-label { color: var(--color-primary); }
+
+        .back-btn {
+            display: block;
+            text-align: center;
+            margin: 40px auto;
+            color: var(--color-text-secondary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .back-btn:hover {
+            color: var(--color-primary-hover);
+        }
+
+        @media (max-width: 768px) {
+            .qa-card { padding: 20px; }
+            h1 { font-size: 24px; }
+            .question { font-size: 18px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <img src="banner.png" alt="Lab59 Logo" style="height: 80px; margin-bottom: 20px;" onerror="this.style.display='none'">
+            
+            <div id="dynamicGreeting" class="dynamic-greeting">AI Maturity Guide</div>
+            
+            <h1>Interview Strategy Playbook</h1>
+            <p class="subtitle">How to articulate advanced AI concepts in CS interviews</p>
+        </header>
+
+        <div id="qa-container">
+            </div>
+
+        <a href="index.html" class="back-btn">← Back to Assessment</a>
+    </div>
+
+    <script>
+        // 1. Parse URL Parameter for Personalization
+        const urlParams = new URLSearchParams(window.location.search);
+        const userLevel = urlParams.get('level') || 'standard';
+        
+        const greetingElement = document.getElementById('dynamicGreeting');
+        
+        // Customize greeting based on assessment score
+        if (userLevel === 'reactive' || userLevel === 'developing') {
+            greetingElement.textContent = "Your Path to Proactive CS";
+            greetingElement.style.color = "var(--color-warning)";
+            greetingElement.style.background = "rgba(168, 75, 47, 0.1)"; // Warning color tint
+        } else if (userLevel === 'proactive' || userLevel === 'leading') {
+            greetingElement.textContent = "Advanced Leader Strategy";
+            greetingElement.style.color = "var(--color-success)";
+            greetingElement.style.background = "rgba(14, 124, 74, 0.1)"; // Success color tint
+        }
+
+        // 2. Q&A Database
+        const interviewQuestions = [
+            {
+                q: "What are best practices for integrating AI into existing customer success frameworks?",
+                textbook: "Conducting a thorough needs assessment, mapping AI tools to specific customer success processes, ensuring seamless data integration, and training teams.",
+                lab59: "The best practice is to move away from treating AI as a basic summary tool and instead map it directly to behavioral and emotional checkpoints. You start by centralizing fragmented communication data—emails, Slack, Gong, or Fellow transcripts—into a single source of truth. From there, you train the team not just to look at lagging usage metrics, but to leverage AI for pattern recognition and adversarial stress-testing before major customer renewals or Business Reviews."
+            },
+            {
+                q: "How does data-driven insight improve CRM strategies?",
+                textbook: "Data-driven insight allows customer success teams to proactively identify customer needs, predict potential churn risks, and personalize engagements.",
+                lab59: "It shifts the entire CS organization from reactive firefighting to proactive mitigation. Instead of waiting for a customer to tell you they are leaving at renewal time, data-driven AI models track leading indicators—such as a sudden drop in meeting attendance, a subtle shift in email tone, or deferral language from key stakeholders. This gives CSMs a highly targeted, objective early warning system weeks before a health score drops."
+            },
+            {
+                q: "What challenges arise when implementing AI in CS, and how are they addressed?",
+                textbook: "Challenges include data quality issues, resistance to change, lack of clear use cases, and integration complexity.",
+                lab59: "The primary roadblock is data fragmentation and standard human bias—teams relying on 'gut feelings' or messy, manual CRM notes. We address this by establishing strict data hygiene up front, automatically funneling conversational intelligence data into central repositories, and demonstrating immediate tactical value to the staff. Showing them how AI can expose blind spots or simulate a skeptical CFO's objections creates immediate buy-in."
+            },
+            {
+                q: "What methods can be used to leverage AI for proactive customer engagement?",
+                textbook: "Deploying chatbots, utilizing predictive analytics to trigger timely outreach, and automating responses to common inquiries.",
+                lab59: "We look past basic chatbots and focus on automated sentiment triggers. For instance, when an integrated AI model flags a decline in executive champion engagement or notices that secondary stakeholders are missing from calls, it instantly alerts the CSM. The method is all about using predictive analytics to prompt a tailored, human-led intervention exactly when a risk signal is detected."
+            },
+            {
+                q: "How can machine learning models predict customer churn?",
+                textbook: "Machine learning models analyze behavioral, transactional, and support data to identify patterns and risk factors for churn.",
+                lab59: "They move the needle by analyzing a multi-factor dataset that humans simply can't process manually at scale. The models continuously ingest a mixture of hard product adoption data, support ticket frequency, and soft interaction data (like tone analysis from recent calls). By identifying hidden anomalies and historical patterns of past churned accounts, the AI outputs an objective probability score, signaling defection risk long before a formal cancellation request occurs."
+            },
+            {
+                q: "What key KPIs should be tracked when utilizing AI tools in CS?",
+                textbook: "Essential KPIs include CSAT, NPS, customer retention rate, resolution time, and AI response accuracy.",
+                lab59: "You have to track both operational and financial metrics. On the operational side, we measure AI response and sentiment accuracy, alongside time-to-resolution. On the strategic side, we tie AI performance directly to core revenue metrics: Net Revenue Retention (NRR), expansion ARR, and the reduction of unexpected churn. If the AI is successfully flagging leading indicators, your unexpected churn rate should plummet."
+            }
+        ];
+
+        // 3. Render Logic
+        const container = document.getElementById('qa-container');
+
+        interviewQuestions.forEach((item, index) => {
+            const card = document.createElement('div');
+            card.className = 'qa-card';
+            
+            card.innerHTML = `
+                <div class="question">Q${index + 1}: ${item.q}</div>
+                <button class="reveal-btn" onclick="toggleAnswer(${index})">Formulate your answer, then click to reveal strategy</button>
+                
+                <div class="answers-container" id="answer-${index}">
+                    <div class="textbook-answer">
+                        <span class="answer-label">Standard / Textbook Answer</span>
+                        ${item.textbook}
+                    </div>
+                    <div class="lab59-answer">
+                        <span class="answer-label">Proactive / Lab59 Answer</span>
+                        ${item.lab59}
+                    </div>
+                </div>
+            `;
+            container.appendChild(card);
+        });
+
+        // Toggle visibility function
+        window.toggleAnswer = function(index) {
+            const answerDiv = document.getElementById(`answer-${index}`);
+            const btn = answerDiv.previousElementSibling;
+            
+            if (answerDiv.classList.contains('show')) {
+                answerDiv.classList.remove('show');
+                btn.textContent = "Formulate your answer, then click to reveal strategy";
+            } else {
+                answerDiv.classList.add('show');
+                btn.textContent = "Hide Answers";
+            }
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Success AI Maturity Assessment</title>
+    <style>
+        :root {
+            --color-background: #fcfcf9;
+            --color-surface: #fffffe;
+            --color-text: #2258a5;
+            --color-text-secondary: #1668bd;
+            --color-primary: #2258a5;
+            --color-primary-hover: #ffb318;
+            --color-border: rgba(94, 82, 64, 0.2);
+            --color-success: #0e7c4a;
+            --color-warning: #a84b2f;
+            --color-error: #c0152f;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.06);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--color-background);
+            color: var(--color-text);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 32px;
+            margin-bottom: 12px;
+            color: var(--color-text);
+        }
+
+        .subtitle {
+            font-size: 18px;
+            color: var(--color-text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .description {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .progress-bar {
+            background: var(--color-surface);
+            border-radius: 12px;
+            height: 8px;
+            margin: 30px 0;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .progress-fill {
+            background: var(--color-primary);
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .question-card {
+            background: var(--color-surface);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 20px;
+        }
+
+        .question-number {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--color-primary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .question-text {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--color-text);
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .option {
+            padding: 16px 20px;
+            border: 2px solid var(--color-border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background: var(--color-surface);
+        }
+
+        .option:hover {
+            border-color: var(--color-primary);
+            background: rgba(33, 128, 141, 0.05);
+        }
+
+        .option.selected {
+            border-color: var(--color-primary);
+            background: rgba(33, 128, 141, 0.1);
+        }
+
+        .option-label {
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: var(--color-text);
+        }
+
+        .option-description {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+        }
+
+        .results {
+            display: none;
+            background: var(--color-surface);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-md);
+            text-align: center;
+        }
+
+        .results.show {
+            display: block;
+        }
+
+        .score-circle {
+            width: 160px;
+            height: 160px;
+            margin: 20px auto;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--color-surface);
+        }
+
+        .score-circle.reactive {
+            background: var(--color-error);
+        }
+
+        .score-circle.developing {
+            background: var(--color-warning);
+        }
+
+        .score-circle.proactive {
+            background: var(--color-success);
+        }
+
+        .score-circle.leading {
+            background: var(--color-primary);
+        }
+
+        .maturity-level {
+            font-size: 28px;
+            font-weight: 700;
+            margin: 20px 0 10px;
+        }
+
+        .maturity-description {
+            font-size: 16px;
+            color: var(--color-text-secondary);
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+
+        .recommendations {
+            text-align: left;
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 1px solid var(--color-border);
+        }
+
+        .recommendations h3 {
+            font-size: 20px;
+            margin-bottom: 16px;
+        }
+
+        .recommendation-item {
+            padding: 16px;
+            background: rgba(33, 128, 141, 0.05);
+            border-left: 3px solid var(--color-primary);
+            margin-bottom: 12px;
+            border-radius: 4px;
+        }
+
+        .recommendation-item strong {
+            display: block;
+            margin-bottom: 4px;
+            color: var(--color-text);
+        }
+
+        .btn {
+            background: var(--color-primary);
+            color: white;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s ease;
+            margin-top: 20px;
+        }
+
+        .btn:hover {
+            background: var(--color-primary-hover);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 24px;
+            }
+
+            .question-text {
+                font-size: 18px;
+            }
+
+            .question-card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+                    <img src="banner.png" alt="Lab59 Logo" style="height: 80px; margin-bottom: 20px;">
+<h1>Customer Success AI Maturity Assessment</h1>
+            <p class="subtitle">Where do you stand on the AI adoption spectrum?</p>
+            <p class="description">Answer 10 questions to assess your current AI maturity level and get personalised recommendations for improvement.</p>
+        </header>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+        <div id="questionnaire"></div>
+
+        <div class="results" id="results">
+            <div class="score-circle" id="scoreCircle">
+                <span id="scorePercent"></span>
+            </div>
+            <div class="maturity-level" id="maturityLevel"></div>
+            <p class="maturity-description" id="maturityDescription"></p>
+            
+            <div class="recommendations" id="recommendations"></div>
+
+            <button class="btn" onclick="resetAssessment()">Retake Assessment</button>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                question: "How do you currently use AI in your Customer Success workflow?",
+                options: [
+                    {
+                        label: "Not using AI",
+                        description: "We rely on manual processes and traditional tools",
+                        score: 0
+                    },
+                    {
+                        label: "Basic automation",
+                        description: "Using AI for transcription and basic summaries only",
+                        score: 1
+                    },
+                    {
+                        label: "Sentiment tracking",
+                        description: "Using AI to analyze customer sentiment and engagement",
+                        score: 2
+                    },
+                    {
+                        label: "Adversarial thinking",
+                        description: "Using AI to stress-test strategies and find blind spots",
+                        score: 3
+                    }
+                ]
+            },
+            {
+                question: "What type of customer data informs your decisions?",
+                options: [
+                    {
+                        label: "Manual reporting",
+                        description: "Quarterly reviews and ad-hoc customer feedback",
+                        score: 0
+                    },
+                    {
+                        label: "Lagging indicators",
+                        description: "NPS, CSAT, usage metrics after the fact",
+                        score: 1
+                    },
+                    {
+                        label: "Leading indicators",
+                        description: "Sentiment shifts, attendance patterns, tone analysis",
+                        score: 2
+                    },
+                    {
+                        label: "Predictive analytics",
+                        description: "AI-powered churn prediction and expansion signals",
+                        score: 3
+                    }
+                ]
+            },
+            {
+                question: "How do you prepare for customer business reviews (QBRs)?",
+                options: [
+                    {
+                        label: "Product-focused",
+                        description: "47-slide deck with our internal metrics",
+                        score: 0
+                    },
+                    {
+                        label: "Customer metrics",
+                        description: "Usage data and engagement statistics",
+                        score: 1
+                    },
+                    {
+                        label: "Outcome-driven",
+                        description: "Business value and ROI tied to their goals",
+                        score: 2
+                    },
+                    {
+                        label: "Adversarial prep",
+                        description: "Stress-test with AI to anticipate objections",
+                        score: 3
+                    }
+                ]
+            },
+            {
+                question: "How are your customer communication tools integrated?",
+                options: [
+                    {
+                        label: "Fragmented",
+                        description: "Multiple tools with no central repository",
+                        score: 0
+                    },
+                    {
+                        label: "Partially integrated",
+                        description: "Some tools feed into CRM manually",
+                        score: 1
+                    },
+                    {
+                        label: "Centralized",
+                        description: "All data aggregated into single source of truth",
+                        score: 2
+                    },
+                    {
+                        label: "AI-analyzed",
+                        description: "Automated sentiment analysis across all channels",
+                        score: 3
+                    }
+                ]
+            },
+            {
+                question: "When do you identify at-risk customers?",
+                options: [
+                    {
+                        label: "At renewal time",
+                        description: "When they tell us they're not renewing",
+                        score: 0
+                    },
+                    {
+                        label: "Monthly reviews",
+                        description: "During scheduled health score assessments",
+                        score: 1
+                    },
+                    {
+                        label: "Real-time alerts",
+                        description: "When engagement or usage drops significantly",
+                        score: 2
+                    },
+                    {
+                        label: "Subtle signals",
+                        description: "Tone shifts, missing stakeholders, deferral language",
+                        score: 3
+                    }
+                ]
+            },
+            {
+                question: "How do you track conversation quality with customers?",
+                options: [
+                    {
+                        label: "Don't track",
+                        description: "CSMs remember key points informally",
+                        score: 0
+                    },
+                    {
+                        label: "Manual notes",
+                        description: "CSMs write summaries after each call",
+                        score: 1
+                    },
+                    {
+                        label: "Auto-transcription",
+                        description: "Tools like Gong/Fellow transcribe meetings",
+                        score: 2
+                    },
+                    {
+                        label: "Sentiment analysis",
+                        description: "AI flags tone, attendance, and engagement patterns",
+                        score: 3
+                    }
+                ]
+            },
+            {
+                question: "What's your approach to customer health scores?",
+                options: [
+                    {
+                        label: "Gut feeling",
+                        description: "CSMs assess based on intuition",
+                        score: 0
+                    },
+                    {
+                        label: "Usage metrics",
+                        description: "Product adoption and feature usage",
+                        score: 1
+                    },
+                    {
+                        label: "Multi-factor",
+                        description: "Usage + engagement + support tickets",
+                        score: 2
+                    },
+                    {
+                        label: "Predictive AI",
+                        description: "Behavior + sentiment + stakeholder patterns",
+                        score: 3
+                    }
+                ]
+            },
+            {
+                question: "How do you handle champion turnover?",
+                options: [
+                    {
+                        label: "Reactive",
+                        description: "Find out when they're already gone",
+                        score: 0
+                    },
+                    {
+                        label: "Aware",
+                        description: "Customer tells us when champion is leaving",
+                        score: 1
+                    },
+                    {
+                        label: "Multi-threading",
+                        description: "Build relationships with multiple stakeholders",
+                        score: 2
+                    },
+                    {
+                        label: "Predictive",
+                        description: "AI flags declining champion engagement early",
+                        score: 3
+                    }
+                ]
+            },
+            {
+                question: "What metrics do you report to leadership?",
+                options: [
+                    {
+                        label: "Activity metrics",
+                        description: "Number of calls, emails, touchpoints",
+                        score: 0
+                    },
+                    {
+                        label: "Satisfaction scores",
+                        description: "NPS, CSAT, customer feedback",
+                        score: 1
+                    },
+                    {
+                        label: "Business outcomes",
+                        description: "Renewal rate, expansion ARR, retention",
+                        score: 2
+                    },
+                    {
+                        label: "Leading + lagging",
+                        description: "Predictive churn signals + revenue metrics",
+                        score: 3
+                    }
+                ]
+            },
+            {
+                question: "How do you use AI to improve your CS strategy?",
+                options: [
+                    {
+                        label: "Don't use AI",
+                        description: "Strategy based on experience and intuition",
+                        score: 0
+                    },
+                    {
+                        label: "Reporting",
+                        description: "AI generates dashboards and summaries",
+                        score: 1
+                    },
+                    {
+                        label: "Pattern recognition",
+                        description: "AI identifies trends and anomalies",
+                        score: 2
+                    },
+                    {
+                        label: "Adversarial testing",
+                        description: "AI challenges assumptions and exposes blind spots",
+                        score: 3
+                    }
+                ]
+            }
+        ];
+
+        let currentQuestion = 0;
+        let answers = [];
+
+        function renderQuestion() {
+            const questionContainer = document.getElementById('questionnaire');
+            const question = questions[currentQuestion];
+
+            const progress = ((currentQuestion + 1) / questions.length) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+
+            questionContainer.innerHTML = `
+                <div class="question-card">
+                    <div class="question-number">Question ${currentQuestion + 1} of ${questions.length}</div>
+                    <div class="question-text">${question.question}</div>
+                    <div class="options">
+                        ${question.options.map((option, index) => `
+                            <div class="option" onclick="selectOption(${index})">
+                                <div class="option-label">${option.label}</div>
+                                <div class="option-description">${option.description}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        function selectOption(optionIndex) {
+            const selectedScore = questions[currentQuestion].options[optionIndex].score;
+            answers[currentQuestion] = selectedScore;
+
+            const options = document.querySelectorAll('.option');
+            options.forEach((opt, idx) => {
+                opt.classList.toggle('selected', idx === optionIndex);
+            });
+
+            setTimeout(() => {
+                if (currentQuestion < questions.length - 1) {
+                    currentQuestion++;
+                    renderQuestion();
+                } else {
+                    showResults();
+                }
+            }, 300);
+        }
+
+        function showResults() {
+            document.getElementById('questionnaire').classList.add('hidden');
+            document.getElementById('progressFill').style.width = '100%';
+
+            const totalScore = answers.reduce((sum, score) => sum + score, 0);
+            const maxScore = questions.length * 3;
+            const percentage = Math.round((totalScore / maxScore) * 100);
+
+            let maturityLevel, maturityClass, description, recommendations;
+
+            if (percentage < 25) {
+                maturityLevel = "Reactive";
+                maturityClass = "reactive";
+                description = "Your CS team is in reactive mode, relying on manual processes and lagging indicators. You're addressing issues after they become problems, leaving significant value on the table.";
+                recommendations = [
+                    {
+                        title: "Start with conversation intelligence",
+                        text: "Implement Gong or Fellow to automatically transcribe and analyze customer meetings. This will save time and surface insights you're currently missing."
+                    },
+                    {
+                        title: "Consolidate your data",
+                        text: "Create a central repository in your CRM for all customer interactions. Stop relying on scattered notes and tribal knowledge."
+                    },
+                    {
+                        title: "Define leading indicators",
+                        text: "Identify 3-5 signals that predict churn before it shows up in usage metrics. Start tracking attendance patterns, response times, and sentiment."
+                    }
+                ];
+            } else if (percentage < 50) {
+                maturityLevel = "Developing";
+                maturityClass = "developing";
+                description = "You're taking steps toward modern CS practices, but still heavily dependent on lagging indicators. You have tools but aren't leveraging them for strategic advantage.";
+                recommendations = [
+                    {
+                        title: "Shift from lagging to leading indicators",
+                        text: "Stop relying solely on NPS and usage data. Use sentiment analysis to detect tone shifts in emails, support tickets, and meeting conversations."
+                    },
+                    {
+                        title: "Implement adversarial prompting",
+                        text: "Before major QBRs, use AI to simulate skeptical stakeholders. Ask: 'Where would a competitor attack our value prop?' This exposes blind spots."
+                    },
+                    {
+                        title: "Build multi-threaded relationships",
+                        text: "Don't depend on a single champion. Use conversation intelligence to track which stakeholders are engaged and who's going silent."
+                    }
+                ];
+            } else if (percentage < 75) {
+                maturityLevel = "Proactive";
+                maturityClass = "proactive";
+                description = "You're using AI strategically and acting on leading indicators. Your CS team anticipates issues and demonstrates value proactively. There's still room to optimize.";
+                recommendations = [
+                    {
+                        title: "Automate sentiment analysis across channels",
+                        text: "Aggregate data from all communication tools (Gong, Fellow, email, Slack) and run private sentiment analysis. Flag defection risk before it's obvious."
+                    },
+                    {
+                        title: "Create adversarial playbooks",
+                        text: "Develop reusable AI prompts that challenge your assumptions: 'You're the CFO who thinks we're overpriced. What metrics would you dismiss?'"
+                    },
+                    {
+                        title: "Train your team on AI best practices",
+                        text: "Share what's working. Build a library of effective prompts and successful interventions. Scale your approach across the CS organization."
+                    }
+                ];
+            } else {
+                maturityLevel = "Leading";
+                maturityClass = "leading";
+                description = "You're at the forefront of AI-powered Customer Success. You use adversarial thinking, predictive analytics, and leading indicators to protect revenue at scale. You find problems before customers do.";
+                recommendations = [
+                    {
+                        title: "Share your success externally",
+                        text: "You're in the top tier. Write case studies, speak at conferences, and share what's working. Your approach is the future of Customer Success."
+                    },
+                    {
+                        title: "Mentor other CS leaders",
+                        text: "Help the industry mature by teaching adversarial thinking and AI-powered workflows. Elevate the profession."
+                    },
+                    {
+                        title: "Keep iterating",
+                        text: "AI capabilities evolve rapidly. Stay curious, experiment with new tools, and continuously refine your leading indicator framework."
+                    }
+                ];
+            }
+
+            document.getElementById('scoreCircle').className = `score-circle ${maturityClass}`;
+            document.getElementById('scorePercent').textContent = percentage + '%';
+            document.getElementById('maturityLevel').textContent = maturityLevel;
+            document.getElementById('maturityDescription').textContent = description;
+
+            const recsHTML = `
+                <h3>Your Next Steps</h3>
+                ${recommendations.map(rec => `
+                    <div class="recommendation-item">
+                        <strong>${rec.title}</strong>
+                        ${rec.text}
+                    </div>
+                `).join('')}
+            `;
+
+            document.getElementById('recommendations').innerHTML = recsHTML;
+            document.getElementById('results').classList.add('show');
+        }
+
+        function resetAssessment() {
+            currentQuestion = 0;
+            answers = [];
+            document.getElementById('questionnaire').classList.remove('hidden');
+            document.getElementById('results').classList.remove('show');
+            renderQuestion();
+        }
+
+        // Initialize
+        renderQuestion();
+    </script>
+</body>
+</html>
+
