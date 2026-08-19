@@ -1,0 +1,30 @@
+[
+  {
+    "slug": "why-static-beats-wordpress",
+    "title": "Why Static Architecture Outperforms WordPress for Local SMEs",
+    "date": "2026-08-18",
+    "summary": "Eliminating monthly maintenance retainers, plugin security vulnerabilities, and server latency using pure HTML, CSS, and edge static hosting.",
+    "file": "posts/why-static-beats-wordpress.md"
+  },
+  {
+    "slug": "reducing-enterprise-time-to-value",
+    "title": "Reducing Time-to-Value in Enterprise Customer Onboarding",
+    "date": "2026-08-10",
+    "summary": "How proactive leading indicator tracking and structured diagnostic frameworks eliminate customer churn risk during complex software deployments.",
+    "file": "posts/reducing-enterprise-time-to-value.md"
+  },
+  {
+    "slug": "eliminating-digital-friction",
+    "title": "Identifying and Eliminating Digital Friction in Modern Business Operations",
+    "date": "2026-07-28",
+    "summary": "A practical breakdown of how bloated tech stacks create operational waste and how lean digital foundations restore clarity and speed.",
+    "file": "posts/eliminating-digital-friction.md"
+  }
+    {
+    "slug": "2026: What you need to Know",
+    "title": "7 Social Media Marketing Trends That Will Redefine 2026: What You Need to Know",
+    "date": "2025-11-25",
+    "summary": "2026 Social Media Shift: Audiences are rejecting synthetic AI influencers in favor of authentic, human-driven personal brands.",
+    "file": "posts/7 Social Media Marketing Trends That Will Redefine 2026.md"
+  }
+]

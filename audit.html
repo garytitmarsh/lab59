@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Friction & Waste Audit | LAB59</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-background: #000000;
+            --color-surface: #0e1017;
+            --color-card: #161922;
+            --color-text: #FFFFFF;
+            --color-text-secondary: #97999F;
+            --color-primary: #0046FF;
+            --color-primary-hover: #1f5eff;
+            --color-border: rgba(255, 255, 255, 0.12);
+            --shadow-md: 0 12px 32px rgba(0, 0, 0, 0.6);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--color-background);
+            color: var(--color-text);
+            line-height: 1.6;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 760px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .brand-logo-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-size: 2.2rem;
+            color: #FFFFFF;
+            letter-spacing: -0.5px;
+        }
+
+        .brand-logo-header strong {
+            font-weight: 800;
+            color: #FFFFFF;
+        }
+
+        .brand-logo-header span {
+            font-weight: 400;
+            color: #FFFFFF;
+            margin-left: 1px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.35rem 0.85rem;
+            background: rgba(0, 70, 255, 0.15);
+            color: var(--color-primary);
+            border: 1px solid rgba(0, 70, 255, 0.4);
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--color-text);
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.5px;
+        }
+
+        .header p {
+            color: var(--color-text-secondary);
+            font-size: 1.05rem;
+        }
+
+        .card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow-md);
+            position: relative;
+        }
+
+        .progress-bar-container {
+            width: 100%;
+            height: 6px;
+            background: var(--color-card);
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: var(--color-primary);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .question-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            font-size: 0.85rem;
+            color: var(--color-text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+
+        .question-title {
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--color-text);
+            line-height: 1.4;
+        }
+
+        .options-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .option-btn {
+            background: var(--color-card);
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            padding: 1.2rem 1.5rem;
+            text-align: left;
+            color: var(--color-text);
+            font-size: 0.95rem;
+            font-family: 'Montserrat', sans-serif;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .option-btn:hover {
+            border-color: var(--color-primary);
+            background: rgba(0, 70, 255, 0.08);
+            transform: translateY(-2px);
+        }
+
+        .score-circle {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            border: 5px solid var(--color-primary);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 1.5rem auto;
+            background: var(--color-card);
+            box-shadow: 0 0 20px rgba(0, 70, 255, 0.25);
+        }
+
+        .score-circle .percent {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--color-text);
+            line-height: 1;
+        }
+
+        .score-circle .label {
+            font-size: 0.7rem;
+            color: var(--color-text-secondary);
+            text-transform: uppercase;
+            margin-top: 4px;
+            font-weight: 600;
+        }
+
+        .results-container {
+            display: none;
+            text-align: center;
+        }
+
+        .results-container.show {
+            display: block;
+        }
+
+        .maturity-title {
+            font-size: 1.6rem;
+            font-weight: 800;
+            margin-bottom: 0.75rem;
+            color: #FFFFFF;
+        }
+
+        .maturity-desc {
+            color: var(--color-text-secondary);
+            font-size: 1.05rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .recommendations {
+            text-align: left;
+            background: var(--color-card);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid var(--color-border);
+            margin-bottom: 2rem;
+        }
+
+        .recommendations h3 {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            color: var(--color-primary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 700;
+        }
+
+        .recommendation-item {
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .recommendation-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .recommendation-item strong {
+            display: block;
+            color: var(--color-text);
+            margin-bottom: 0.25rem;
+        }
+
+        .cta-box {
+            background: rgba(0, 70, 255, 0.08);
+            border: 1px solid var(--color-primary);
+            border-radius: 12px;
+            padding: 1.75rem;
+            margin-top: 2rem;
+        }
+
+        .cta-box h4 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: var(--color-text);
+            font-weight: 700;
+        }
+
+        .cta-box p {
+            font-size: 0.95rem;
+            color: var(--color-text-secondary);
+            margin-bottom: 1.25rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--color-primary);
+            color: #fff;
+            font-weight: 700;
+            padding: 0.9rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s ease;
+            font-size: 1rem;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .btn:hover {
+            background: var(--color-primary-hover);
+        }
+
+        .btn-reset {
+            background: transparent;
+            border: 1px solid var(--color-border);
+            color: var(--color-text-secondary);
+            margin-top: 1.5rem;
+        }
+
+        .btn-reset:hover {
+            background: var(--color-card);
+            color: var(--color-text);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="brand-logo-header"><strong>LAB</strong><span>59</span></div>
+        
+        <div class="header">
+            <span class="badge">Diagnostic Engine</span>
+            <h1>Digital Friction & Waste Audit</h1>
+            <p>Uncover your operational friction, tech risk, and agency retainer waste in 4 minutes.</p>
+        </div>
+
+        <div class="card">
+            <div id="questionnaire">
+                <div class="progress-bar-container">
+                    <div class="progress-bar" id="progressBar"></div>
+                </div>
+
+                <div class="question-meta">
+                    <span id="pillarTag">Pillar 1: Maintenance Drag</span>
+                    <span id="questionCounter">Question 1 of 5</span>
+                </div>
+
+                <div class="question-title" id="questionTitle">Loading question...</div>
+
+                <div class="options-grid" id="optionsGrid"></div>
+            </div>
+
+            <div id="results" class="results-container">
+                <div class="score-circle" id="scoreCircle">
+                    <span class="percent" id="scorePercent">0%</span>
+                    <span class="label">Efficiency Score</span>
+                </div>
+
+                <div class="maturity-title" id="maturityLevel">Calculating...</div>
+                <div class="maturity-desc" id="maturityDescription">Please wait while we evaluate your answers.</div>
+
+                <div class="recommendations" id="recommendations"></div>
+
+                <div class="cta-box">
+                    <h4>Stop Paying For Fluff</h4>
+                    <p>Download the step-by-step PDF roadmap showing how micro-SMEs build a set-and-forget digital presence with zero monthly retainers.</p>
+                    <a href="blueprint.html" class="btn">Download Low-Maintenance Blueprint</a>
+                </div>
+
+                <button class="btn btn-reset" onclick="resetAssessment()">Retake Diagnostic Audit</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                pillar: "PILLAR 1: MAINTENANCE DRAG",
+                title: "Who updates your website’s software, plugins, and security settings?",
+                options: [
+                    { text: "It is a lightweight static setup requiring zero software updates or plugin management.", pts: 5 },
+                    { text: "I try to log in and update plugins myself every few months (when I remember).", pts: 3 },
+                    { text: "We pay an agency or developer a monthly retainer just to manage and update plugins.", pts: 1 }
+                ]
+            },
+            {
+                pillar: "PILLAR 1: MAINTENANCE DRAG",
+                title: "How do you update fresh photos or recent project work from the job site?",
+                options: [
+                    { text: "Directly from my phone via the Google Maps / Google Business app in under 30 seconds.", pts: 5 },
+                    { text: "I have to log into a clunky website dashboard (like WordPress) and reformat images.", pts: 3 },
+                    { text: "I have to email photos to a web developer and wait a week for a bill.", pts: 1 }
+                ]
+            },
+            {
+                pillar: "PILLAR 2: RETAINER EXPOSURE",
+                title: "How much are you currently paying in ongoing monthly 'marketing or SEO' retainers?",
+                options: [
+                    { text: "$0. I own my digital assets outright and they generate work without monthly agency fees.", pts: 5 },
+                    { text: "Under $100–$200 for essential domain hosting and basic software subscriptions.", pts: 3 },
+                    { text: "$500 to $2,000+ per month to an agency, and I’m not entirely sure what they deliver.", pts: 1 }
+                ]
+            },
+            {
+                pillar: "PILLAR 2: RETAINER EXPOSURE",
+                title: "How do you track the success of your online footprint?",
+                options: [
+                    { text: "By bottom-line results: direct phone calls, map direction requests, and bookings.", pts: 5 },
+                    { text: "I just ask new customers 'how did you find us?' when they call.", pts: 3 },
+                    { text: "An agency hands me a complex monthly report filled with 'impressions' and 'clicks'.", pts: 1 }
+                ]
+            },
+            {
+                pillar: "PILLAR 3: FIRST-IMPRESSION CLARITY",
+                title: "When a warm referral Googles your business name to cross-check you, what do they see?",
+                options: [
+                    { text: "An ultra-fast, high-end digital anchor tightly connected to active Google reviews.", pts: 5 },
+                    { text: "A basic, functional site alongside an incomplete Google Business profile.", pts: 3 },
+                    { text: "Outdated details, broken mobile formatting, or hard to find me at all.", pts: 1 }
+                ]
+            }
+        ];
+
+        let currentQuestion = 0;
+        let answers = [];
+
+        function renderQuestion() {
+            const q = questions[currentQuestion];
+            document.getElementById('pillarTag').textContent = q.pillar;
+            document.getElementById('questionCounter').textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
+            document.getElementById('questionTitle').textContent = q.title;
+
+            const progressPct = ((currentQuestion) / questions.length) * 100;
+            document.getElementById('progressBar').style.width = `${progressPct}%`;
+
+            const optionsGrid = document.getElementById('optionsGrid');
+            optionsGrid.innerHTML = '';
+
+            q.options.forEach((opt) => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.innerHTML = `<span>${opt.text}</span> <strong style="color:var(--color-primary); margin-left: 10px;">&rarr;</strong>`;
+                btn.onclick = () => selectOption(opt.pts);
+                optionsGrid.appendChild(btn);
+            });
+        }
+
+        function selectOption(pts) {
+            answers.push(pts);
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                renderQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            document.getElementById('questionnaire').classList.add('hidden');
+            
+            const totalScore = answers.reduce((a, b) => a + b, 0);
+            const maxScore = questions.length * 5;
+            const percentage = Math.round((totalScore / maxScore) * 100);
+
+            let maturityLevel = "";
+            let description = "";
+            let recommendations = [];
+
+            if (totalScore >= 20) {
+                maturityLevel = "The Lean Operator";
+                description = "Your business runs an exceptionally efficient digital operation. You leverage free, high-impact ecosystems like Google Business Profile without bleeding money into monthly agency retainers.";
+                recommendations = [
+                    { title: "Maintain Unbreakable Architecture", text: "Keep your static foundation locked to eliminate maintenance overhead and plugin vulnerabilities." },
+                    { title: "Automate Review Capture", text: "Set up a 1-step automated SMS trigger upon job completion to constantly fuel your Google Business Profile." },
+                    { title: "Protect Asset Ownership", text: "Ensure 100% direct ownership of all Google, domain, and hosting credentials with zero agency gatekeeping." }
+                ];
+            } else if (totalScore >= 10) {
+                maturityLevel = "The Complexity Trap";
+                description = "You have a baseline presence, but it relies on fragile, high-maintenance web software or manual friction. You are exposed to unexpected site breaks or wasted monthly retainers.";
+                recommendations = [
+                    { title: "Shift Updates to Google Ecosystem", text: "Stop fighting web dashboards. Post job updates directly through Google Business Profile from your mobile phone." },
+                    { title: "Eliminate Tech Fragility", text: "Transition your web presence to an unbreakable static anchor that requires zero monthly plugin updates." },
+                    { title: "Audit Monthly Subscriptions", text: "Cancel recurring agency retainers that pay for basic maintenance or fluff reporting." }
+                ];
+            } else {
+                maturityLevel = "Prime Agency Target";
+                description = "You are severely overpaying for minimal return. Your current setup is fragile, high-friction, and a prime target for agencies to exploit through monthly maintenance retainers.";
+                recommendations = [
+                    { title: "Stop Retainer Bleed", text: "Cut unnecessary $500–$2,000/month agency retainers and reclaim direct control of your brand." },
+                    { title: "Adopt Mobile-First Google Workflow", text: "Build your online trust directly where local customers look—via Google Maps and reviews." },
+                    { title: "Deploy an Unbreakable Static Anchor", text: "Replace fragile WordPress setups with a set-and-forget digital foundation." }
+                ];
+            }
+
+            document.getElementById('scorePercent').textContent = percentage + '%';
+            document.getElementById('maturityLevel').textContent = maturityLevel;
+            document.getElementById('maturityDescription').textContent = description;
+
+            const recsHTML = `
+                <h3>Strategic Action Items</h3>
+                ${recommendations.map(rec => `
+                    <div class="recommendation-item">
+                        <strong>${rec.title}</strong>
+                        ${rec.text}
+                    </div>
+                `).join('')}
+            `;
+
+            document.getElementById('recommendations').innerHTML = recsHTML;
+            document.getElementById('results').classList.add('show');
+        }
+
+        function resetAssessment() {
+            currentQuestion = 0;
+            answers = [];
+            document.getElementById('questionnaire').classList.remove('hidden');
+            document.getElementById('results').classList.remove('show');
+            renderQuestion();
+        }
+
+        // Initialize
+        renderQuestion();
+    </script>
+</body>
+</html>

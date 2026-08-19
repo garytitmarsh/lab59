@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insights & Research | LAB59</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        .blog-container {
+            padding: 8rem 8% 6rem 8%;
+            max-width: 1200px;
+            margin: 0 auto;
+            min-height: 80vh;
+        }
+
+        .blog-header {
+            margin-bottom: 3.5rem;
+        }
+
+        .blog-header h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .blog-header p {
+            color: var(--text-slate);
+            font-size: 1.1rem;
+            max-width: 650px;
+        }
+
+        .posts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .post-card {
+            background: var(--card-dark);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: var(--text-white);
+        }
+
+        .post-card:hover {
+            border-color: var(--accent-blue);
+            transform: translateY(-3px);
+        }
+
+        .post-date {
+            font-size: 0.8rem;
+            color: var(--accent-blue);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.8rem;
+        }
+
+        .post-card h2 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.4;
+        }
+
+        .post-card p {
+            color: var(--text-slate);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .read-more {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--accent-blue);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* ARTICLE VIEW STYLING */
+        .article-view {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .back-link {
+            display: inline-block;
+            color: var(--text-slate);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--accent-blue);
+        }
+
+        /* MARKDOWN PARSED CONTENT STYLING */
+        .markdown-body {
+            line-height: 1.8;
+            color: #d1d5db;
+        }
+
+        .markdown-body h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--text-white);
+            margin-bottom: 1.5rem;
+            line-height: 1.3;
+        }
+
+        .markdown-body h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-white);
+            margin: 2.5rem 0 1rem 0;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .markdown-body h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-white);
+            margin: 2rem 0 0.8rem 0;
+        }
+
+        .markdown-body p {
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+        }
+
+        .markdown-body ul, .markdown-body ol {
+            margin: 0 0 1.5rem 1.5rem;
+        }
+
+        .markdown-body li {
+            margin-bottom: 0.5rem;
+        }
+		
+        /* High-Contrast Brand Logo: LAB in 800 bold, 59 in 400 regular */
+        .brand-logo {
+            font-size: 1.5rem;
+            letter-spacing: -0.03em;
+            text-decoration: none;
+            color: var(--text-main);
+        }
+
+        .brand-logo .lab {
+            font-weight: 800;
+        }
+
+        .brand-logo .num {
+            font-weight: 400;
+            color: var(--primary-White);
+        }
+		
+        .markdown-body blockquote {
+            border-left: 4px solid var(--accent-blue);
+            background: var(--surface-dark);
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            font-style: italic;
+            color: var(--text-white);
+        }
+
+        .markdown-body img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            margin: 2rem 0;
+        }
+
+        .markdown-body code {
+            background: var(--surface-dark);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.9rem;
+            color: var(--accent-blue);
+        }
+
+        .markdown-body pre {
+            background: var(--surface-dark);
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px solid var(--border-color);
+            margin: 1.5rem 0;
+        }
+
+        .markdown-body pre code {
+            background: transparent;
+            padding: 0;
+            color: var(--text-white);
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="top-nav">
+           <a href="index.html" class="brand-logo">
+                <span class="lab">LAB</span><span class="num">59</span>
+            </a>
+        <div class="nav-links">
+            <a href="index.html#about">About</a>
+            <a href="index.html#frameworks">Frameworks</a>
+            <a href="blog.html" style="color: var(--accent-blue);">Insights</a>
+        </div>
+    </nav>
+
+    <main class="blog-container">
+        <div id="blog-content">
+            <p style="color: var(--text-slate);">Loading insights...</p>
+        </div>
+    </main>
+
+    <footer>
+        <div>&copy; 2026 LAB59. Built in Brisbane.</div>
+        <div>
+            <a href="blueprint.html">Blueprint</a> | 
+            <a href="mailto:hello@lab59.com.au">Contact</a>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.getElementById('blog-content');
+            const urlParams = new URLSearchParams(window.location.search);
+            const postSlug = urlParams.get('post');
+
+            if (postSlug) {
+                // SINGLE POST VIEW
+                renderSinglePost(postSlug);
+            } else {
+                // GRID VIEW (ALL POSTS)
+                renderPostsGrid();
+            }
+
+            // Function to render all posts grid
+            async function renderPostsGrid() {
+                try {
+                    const response = await fetch('posts/posts.json');
+                    if (!response.ok) throw new Error('Could not load posts manifest.');
+                    const posts = await response.json();
+
+                    let html = `
+                        <div class="blog-header">
+                            <h1>Insights & Technical Briefings</h1>
+                            <p>Thoughts on static software architecture, enterprise customer success frameworks, and digital friction reduction.</p>
+                        </div>
+                        <div class="posts-grid">
+                    `;
+
+                    posts.forEach(post => {
+                        html += `
+                            <a href="blog.html?post=${post.slug}" class="post-card">
+                                <div>
+                                    <div class="post-date">${post.date}</div>
+                                    <h2>${post.title}</h2>
+                                    <p>${post.summary}</p>
+                                </div>
+                                <div class="read-more">Read Article &rarr;</div>
+                            </a>
+                        `;
+                    });
+
+                    html += `</div>`;
+                    container.innerHTML = html;
+                } catch (err) {
+                    container.innerHTML = `
+                        <div class="blog-header">
+                            <h1>Insights</h1>
+                            <p style="color: var(--accent-blue);">No articles published yet or manifest updating.</p>
+                        </div>
+                    `;
+                }
+            }
+
+            // Function to fetch and render a single markdown post
+            async function renderSinglePost(slug) {
+                try {
+                    // Fetch manifest to get filename
+                    const manifestRes = await fetch('posts/posts.json');
+                    const posts = await manifestRes.json();
+                    const postMeta = posts.find(p => p.slug === slug);
+
+                    if (!postMeta) throw new Error('Post not found in manifest.');
+
+                    // Fetch the actual Markdown file
+                    const mdRes = await fetch(postMeta.file);
+                    if (!mdRes.ok) throw new Error('Markdown file could not be retrieved.');
+                    const mdText = await mdRes.text();
+
+                    // Parse Markdown using marked.js
+                    const parsedContent = marked.parse(mdText);
+
+                    container.innerHTML = `
+                        <div class="article-view">
+                            <a href="blog.html" class="back-link">&larr; Back to all insights</a>
+                            <div class="post-date" style="margin-bottom: 1rem;">Published ${postMeta.date}</div>
+                            <article class="markdown-body">
+                                ${parsedContent}
+                            </article>
+                        </div>
+                    `;
+                    document.title = `${postMeta.title} | LAB59 Insights`;
+                } catch (err) {
+                    container.innerHTML = `
+                        <div class="article-view">
+                            <a href="blog.html" class="back-link">&larr; Back to all insights</a>
+                            <h1 style="font-size: 2rem; margin-top: 2rem;">Article Not Found</h1>
+                            <p style="color: var(--text-slate); margin-top: 1rem;">The requested insight briefing could not be loaded or does not exist.</p>
+                        </div>
+                    `;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

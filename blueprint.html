@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>The Low-Maintenance Digital Blueprint - LAB59</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* BRAND BOARD SPECIFICATIONS */
+        :root {
+            --bg-black: #000000;
+            --surface-dark: #0e1017;
+            --card-dark: #161922;
+            --text-white: #FFFFFF;
+            --text-slate: #97999F;
+            --accent-blue: #0046FF;
+            --border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-black);
+            color: var(--text-white);
+            line-height: 1.6;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        /* PAGE FORMATTING FOR PDF PRINTING */
+        .pdf-page {
+            width: 210mm;
+            height: 297mm; /* A4 Dimensions */
+            padding: 20mm;
+            background-color: var(--bg-black);
+            position: relative;
+            page-break-after: always;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow: hidden;
+            border-bottom: 1px solid #111;
+            margin: 0 auto;
+        }
+
+        /* HEADER & FOOTER */
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--accent-blue);
+            padding-bottom: 12px;
+            margin-bottom: 25px;
+        }
+
+        .brand-logo {
+            font-size: 1.5rem;
+            letter-spacing: -0.5px;
+            color: #FFFFFF;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .brand-logo strong {
+            font-weight: 800;
+            color: #FFFFFF;
+        }
+
+        .brand-logo span {
+            font-weight: 400;
+            color: #FFFFFF;
+            margin-left: 1px;
+        }
+
+        .page-tag {
+            font-size: 0.75rem;
+            color: var(--text-slate);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .page-footer {
+            border-top: 1px solid var(--border-color);
+            padding-top: 12px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            color: var(--text-slate);
+        }
+
+        /* TYPOGRAPHY */
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 10px;
+            letter-spacing: -0.5px;
+            color: var(--text-white);
+        }
+
+        h2 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--accent-blue);
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        p {
+            color: var(--text-slate);
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
+
+        p strong, li strong {
+            color: var(--text-white);
+        }
+
+        .highlight-box {
+            background-color: var(--surface-dark);
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--accent-blue);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        /* COMPARISON TABLE */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.85rem;
+        }
+
+        .comparison-table th {
+            background-color: var(--surface-dark);
+            color: var(--text-white);
+            padding: 12px;
+            text-align: left;
+            border: 1px solid var(--border-color);
+            font-weight: 700;
+        }
+
+        .comparison-table td {
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            color: var(--text-slate);
+            background-color: var(--card-dark);
+        }
+
+        .comparison-table td strong {
+            color: var(--text-white);
+        }
+
+        /* WORKFLOW DIAGRAM */
+        .workflow-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin: 25px 0;
+        }
+
+        .workflow-step {
+            background: var(--card-dark);
+            border: 1px solid var(--border-color);
+            padding: 15px 20px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .step-num {
+            background: var(--accent-blue);
+            color: white;
+            font-weight: 800;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 0.9rem;
+        }
+
+        .step-text h4 {
+            color: var(--text-white);
+            font-size: 1rem;
+            margin-bottom: 2px;
+        }
+
+        .step-text p {
+            margin: 0;
+            font-size: 0.85rem;
+        }
+
+        /* CTA BOX */
+        .cta-container {
+            background: rgba(0, 70, 255, 0.08);
+            border: 1px solid var(--accent-blue);
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .cta-container h3 {
+            color: var(--text-white);
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            font-weight: 800;
+        }
+
+        .btn-fake {
+            display: inline-block;
+            background: var(--accent-blue);
+            color: #fff;
+            font-weight: 700;
+            padding: 12px 25px;
+            border-radius: 6px;
+            text-decoration: none;
+            margin-top: 15px;
+            font-size: 0.9rem;
+        }
+
+        /* MEDIA PRINT SETTINGS */
+        @media print {
+            body {
+                background-color: var(--bg-black);
+            }
+            .pdf-page {
+                margin: 0;
+                border: none;
+                height: 297mm;
+                width: 210mm;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="pdf-page">
+        <div>
+            <div class="page-header">
+                <div class="brand-logo"><strong>LAB</strong><span>59</span></div>
+                <div class="page-tag">Data for Humans | Estd 2025</div>
+            </div>
+
+            <div style="margin-top: 40px;">
+                <p style="color: var(--accent-blue); font-weight: 700; letter-spacing: 1px; text-transform: uppercase; font-size: 0.85rem;">Free Strategic Blueprint</p>
+                <h1>THE LOW-MAINTENANCE DIGITAL BLUEPRINT</h1>
+                <p style="font-size: 1.1rem; color: var(--text-white); font-weight: 600; margin-bottom: 30px;">
+                    How Brisbane small businesses eliminate monthly agency retainers and build an unbreakable local footprint.
+                </p>
+
+                <h2>1. The Complexity Trap</h2>
+                <p>For 1–5 person service operators (plumbers, painters, accountants and local specialists), standard digital marketing is broken.</p>
+                
+                <p>Traditional agencies sell recurring monthly retainers ($500–$2,000/month) under the guise of "website maintenance," "plugin security," and "vanity SEO." They lock you into fragile, database-heavy platforms (like WordPress) where:</p>
+                
+                <ul style="color: var(--text-slate); margin-left: 20px; margin-bottom: 20px; font-size: 0.9rem;">
+                    <li style="margin-bottom: 8px;"><strong>A single automated update</strong> can break your mobile formatting or site layout.</li>
+                    <li style="margin-bottom: 8px;">You pay an <strong>hourly fee</strong> just to change a simple photo or phone number.</li>
+                    <li style="margin-bottom: 8px;">You receive monthly reports filled with <strong>"impressions" and "clicks"</strong> instead of actual phone calls.</li>
+                </ul>
+
+                <div class="highlight-box">
+                    <p style="color: var(--text-white); font-weight: 700; margin: 0;">
+                        The LAB59 Rule: If your digital presence requires paid monthly intervention just to stay online and formatted correctly, your setup is structurally broken.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span>LAB59 Blueprint Series</span>
+            <span>Page 1 of 4</span>
+        </div>
+    </div>
+
+    <div class="pdf-page">
+        <div>
+            <div class="page-header">
+                <div class="brand-logo"><strong>LAB</strong><span>59</span></div>
+                <div class="page-tag">The Tech Stack Pivot</div>
+            </div>
+
+            <h2>2. The Unbreakable Digital Anchor</h2>
+            <p>Your website should be a set-and-forget <strong>unbreakable digital anchor</strong>, not a high-maintenance software project that requires constant patching.</p>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Traditional Agency Site</th>
+                        <th style="color: var(--accent-blue);">LAB59 Static Anchor</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Fragile Database:</strong> Relies on complex servers and vulnerable software setups.</td>
+                        <td><strong>Database-Free:</strong> Built in pure code that structurally cannot crash.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>$250–$2500/mo Retainers:</strong> Required just for basic software and plugin updates.</td>
+                        <td><strong>$0/mo Maintenance:</strong> Zero plugin updates, zero database management fees.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Security Risk:</strong> High target area for database exploits and spam attacks.</td>
+                        <td><strong>Unhackable Architecture:</strong> Zero database attack surface to target.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Slow Mobile Loading:</strong> Heavy plugin bloat drives potential leads away.</td>
+                        <td><strong>Blistering Speed:</strong> Loads instantly across all mobile devices.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="highlight-box">
+                <p style="color: var(--text-white); margin: 0;">
+                    <strong>Set-and-Forget Infrastructure:</strong> By stripping out backend databases, your core layout is permanently locked. It never breaks, never slows down, and incurs zero mandatory monthly maintenance fees.
+                </p>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span>LAB59 Blueprint Series</span>
+            <span>Page 2 of 4</span>
+        </div>
+    </div>
+
+    <div class="pdf-page">
+        <div>
+            <div class="page-header">
+                <div class="brand-logo"><strong>LAB</strong><span>59</span></div>
+                <div class="page-tag">Mobile Content Strategy</div>
+            </div>
+
+            <h2>3. Zero-Friction Mobile Engine</h2>
+            <p>Tradies and sole operators live on their mobile phones. You shouldn't have to log into complex website dashboards or edit code just to show recent work.</p>
+
+            <p>Instead of fighting your website, you manage your content through the app you already use every day: <strong>Google Maps & Google Business Profile (GBP)</strong>.</p>
+
+            <div class="workflow-container">
+                <div class="workflow-step">
+                    <div class="step-num">1</div>
+                    <div class="step-text">
+                        <h4>Snap & Upload On-Site</h4>
+                        <p>Take a quick photo of completed job work on your phone. Post it directly to Google Maps in under 30 seconds.</p>
+                    </div>
+                </div>
+
+                <div class="workflow-step">
+                    <div class="step-num">2</div>
+                    <div class="step-text">
+                        <h4>Fuel Local Map Ranking</h4>
+                        <p>Direct Google uploads signal active local presence to search algorithms, boosting your Map Pack visibility automatically.</p>
+                    </div>
+                </div>
+
+                <div class="workflow-step">
+                    <div class="step-num">3</div>
+                    <div class="step-text">
+                        <h4>Static Anchor Ingestion</h4>
+                        <p>Your static website links directly to active Google reviews and photos, cross-validating trust for warm referrals instantly.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span>LAB59 Blueprint Series</span>
+            <span>Page 3 of 4</span>
+        </div>
+    </div>
+
+    <div class="pdf-page">
+        <div>
+            <div class="page-header">
+                <div class="brand-logo"><strong>LAB</strong><span>59</span></div>
+                <div class="page-tag">Execution & Application</div>
+            </div>
+
+            <h2>4. Automating Referral Validation</h2>
+            <p>High-end operatotions run on word-of-mouth. When a referral is given your name, their first move is searching you on Google to cross-check your standard of work.</p>
+
+            <p><strong>The 1-Step Review System:</strong> Upon completing a job, trigger a 1-click Google review request. Capturing authentic 5-star reviews keeps you at the top of local search results without paying an agency for generic blog posts.</p>
+
+            <div class="cta-container">
+                <p style="color: var(--accent-blue); font-weight: 700; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; margin-bottom: 5px;">Capacity Status: Limited</p>
+                <h3>Ready To Stop Paying For Fluff?</h3>
+                <p style="font-size: 0.85rem; color: var(--text-slate);">
+                    LAB59 is a premium boutique project, not a high-volume agency factory. We selectively co-pilot a hand-picked group of 1–5 staff local operators to build unbreakable foundations.
+                </p>
+				<a href="mailto:gary@lab59.com.au?subject=LAB59%20Engagement%20Inquiry" class="btn btn-primary">Email Gary Directly ✉</a>
+                <p style="margin-top: 15px; font-size: 0.75rem; color: var(--text-slate);">Direct Contact: hello@lab59.com.au | Built in Brisbane</p>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span>LAB59 Blueprint Series</span>
+            <span>Page 4 of 4</span>
+        </div>
+    </div>
+
+</body>
+</html>

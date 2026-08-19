@@ -1,0 +1,23 @@
+[
+  {
+    "slug": "why-static-beats-wordpress",
+    "title": "Why Static Architecture Outperforms WordPress for Local SMEs",
+    "date": "2026-08-18",
+    "summary": "Eliminating monthly maintenance retainers, plugin security vulnerabilities, and server latency using pure HTML, CSS, and edge static hosting.",
+    "file": "posts/why-static-beats-wordpress.md"
+  },
+  {
+    "slug": "eliminating-digital-friction",
+    "title": "Identifying and Eliminating Digital Friction in Modern Business Operations",
+    "date": "2026-07-28",
+    "summary": "A practical breakdown of how bloated tech stacks create operational waste and how lean digital foundations restore clarity and speed.",
+    "file": "posts/eliminating-digital-friction.md"
+  },
+  {
+    "slug": "7-social-media-trends-2026",
+    "title": "7 Social Media Marketing Trends That Will Redefine 2026",
+    "date": "2025-11-25",
+    "summary": "In 2026, the power is shifting from platforms to people. From in-app checkouts to user-controlled feeds and authentic personal brands, here is how social marketing is changing.",
+    "file": "posts/7 Social Media Marketing Trends That Will Redefine 2026.md"
+  }
+]
