@@ -30,6 +30,45 @@
             -webkit-font-smoothing: antialiased;
         }
 
+        /* Fullscreen Animated Background Video & Overlay */
+        .video-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            z-index: -2;
+        }
+
+		:root {
+			--bg-color: #000000;
+			--card-bg: rgba(13, 14, 18, 0.75); /* Semi-transparent dark frosted glass for cards */
+			--border-color: rgba(255, 255, 255, 0.1); /* Subtle clean border */
+			--primary-blue: #0046FF;
+			--text-main: #F8FAFC; /* Softened off-white instead of blinding #FFFFFF */
+			--text-muted: #94A3B8; /* Clear, legible slate grey for body copy */
+		}
+
+		/* Softer video dark mask to let the video breathe */
+		.overlay {
+		position: fixed;
+			top: 0;
+			left: 0;
+			width: 100vw;
+			height: 100vh;
+			background: rgba(0, 0, 0, 0.65); /* Adjusted from 0.75 to 0.65 for better transparency */
+			z-index: -1;
+		}
+
+		/* Frosted glass card style with blur */
+		.card, .cta-banner {
+			background-color: var(--card-bg);
+			backdrop-filter: blur(12px);
+			-webkit-backdrop-filter: blur(12px);
+			border: 1px solid var(--border-color);
+		}
+		
         /* Container Layout */
         .container {
             max-width: 1100px;
@@ -291,6 +330,11 @@
 </head>
 <body>
 
+    <video autoplay muted loop playsinline preload="auto" class="video-bg">
+        <source src="assets/img/background.mp4" type="video/mp4">
+    </video>
+    <div class="overlay"></div>
+	
     <header>
         <div class="container nav-inner">
             <a href="index.html" class="brand-logo">
