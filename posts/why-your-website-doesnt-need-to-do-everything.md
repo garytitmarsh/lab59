@@ -2,9 +2,9 @@
 
 *By Gary Titmarsh*
 
-When I was running production at a Brisbane marketing agency, I watched businesses get sold websites they didn't need. Booking systems for businesses that took bookings over the phone. Blogs that never got a second post. Chat widgets nobody answered. All of it justified as "building out the platform."
+When I was working at a Brisbane marketing agency, I watched businesses get sold content calendars. Programmatic, generic, posted on schedule because consistency was supposed to drive algorithmic visibility. A lot of it was vanity work, updating a client's LinkedIn on their behalf, a branded post for Father's Day, another for some awareness day nobody in the business cared about. It generated clicks and views, but did it directly result in what mattered. Business through the door.
 
-Most of that was for the agency's benefit, not the client's. More features meant a bigger invoice and a longer build. It rarely meant more customers.
+Most of this process was for the agency's benefit, not the client's. More features meant a bigger invoice and a longer build. It didn't necessarily mean more customers.
 
 Here's the thing I kept seeing, and it's the reason LAB59 exists. For most small, owner-operated businesses, the website isn't where customers make their decision. It's where they go to check you're real before they call, message, or walk in. Someone searches for you, finds you on Google, and clicks through to your site mainly to confirm two things: are you legitimate, and do you do what they need.
 
