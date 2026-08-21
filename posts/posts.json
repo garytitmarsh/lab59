@@ -1,23 +1,30 @@
 [
   {
-    "slug": "why-static-beats-wordpress",
-    "title": "Why Static Architecture Outperforms WordPress for Local SMEs",
-    "date": "2026-08-18",
-    "summary": "Eliminating monthly maintenance retainers, plugin security vulnerabilities, and server latency using pure HTML, CSS, and edge static hosting.",
-    "file": "posts/why-static-beats-wordpress.md"
+    "slug": "why-your-website-doesnt-need-to-do-everything",
+    "title": "Why Your Website Doesn't Need to Do Everything",
+    "date": "2026-08-22",
+    "summary": "For most small businesses the website isn't where customers decide, it's where they check you're real. Here's what that actually requires.",
+    "file": "posts/why-your-website-doesnt-need-to-do-everything.md"
   },
   {
-    "slug": "eliminating-digital-friction",
-    "title": "Identifying and Eliminating Digital Friction in Modern Business Operations",
-    "date": "2026-07-28",
-    "summary": "A practical breakdown of how bloated tech stacks create operational waste and how lean digital foundations restore clarity and speed.",
-    "file": "posts/eliminating-digital-friction.md"
+    "slug": "the-website-you-wont-have-to-think-about-again",
+    "title": "The Website You Won't Have to Think About Again",
+    "date": "2026-08-22",
+    "summary": "Why static sites don't break, don't need logins, and don't ask anything of you once they're built.",
+    "file": "posts/the-website-you-wont-have-to-think-about-again.md"
   },
   {
-    "slug": "7-social-media-trends-2026",
-    "title": "7 Social Media Marketing Trends That Will Redefine 2026",
-    "date": "2025-11-25",
-    "summary": "In 2026, the power is shifting from platforms to people. From in-app checkouts to user-controlled feeds and authentic personal brands, here is how social marketing is changing.",
-    "file": "posts/7 Social Media Marketing Trends That Will Redefine 2026.md"
+    "slug": "your-google-profile-is-doing-more-than-your-website",
+    "title": "Your Google Business Profile Is Doing More Than Your Website",
+    "date": "2026-08-22",
+    "summary": "For local businesses, your Google Business Profile usually does more to get you found than your website ever will.",
+    "file": "posts/your-google-profile-is-doing-more-than-your-website.md"
+  },
+  {
+    "slug": "why-we-dont-write-your-content-for-you",
+    "title": "Why We Don't Write Your Content For You",
+    "date": "2026-08-22",
+    "summary": "Stock photos and generic copy don't build trust. Your own words and your own work do.",
+    "file": "posts/why-we-dont-write-your-content-for-you.md"
   }
 ]
