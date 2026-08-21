@@ -11,6 +11,3 @@ By deploying pure static assets directly to global edge networks like Cloudflare
 ## 3. Zero Maintenance Retainers
 Without database maintenance requirements or plugin updates that break layouts upon updating, a static site requires zero ongoing maintenance work. It stays online, hyper-fast, and secure indefinitely without intervention.
 
-## Architectural Summary
-- **Database CMS (WordPress):** Request $\rightarrow$ PHP Processing $\rightarrow$ Database Query $\rightarrow$ HTML Generation $\rightarrow$ Render (300ms–2000ms latency).
-- **Static Edge Architecture (LAB59):** Request $\rightarrow$ CDN Edge File $\rightarrow$ Render (<50ms latency).
