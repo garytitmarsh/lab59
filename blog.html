@@ -4,10 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Insights & Research | LAB59</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <style>
+        .video-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            z-index: -2;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.65);
+            z-index: -1;
+        }
+
+        footer {
+            background: transparent;
+        }
+
         .blog-container {
             padding: 8rem 8% 6rem 8%;
             max-width: 1200px;
@@ -150,23 +174,41 @@
             margin-bottom: 0.5rem;
         }
 		
-        /* High-Contrast Brand Logo: LAB in 800 bold, 59 in 400 regular */
+        /* High-Contrast Brand Logo: LAB in 700 bold Montserrat, 59 in 400 regular Montserrat */
         .brand-logo {
             font-size: 1.5rem;
             letter-spacing: -0.03em;
             text-decoration: none;
-            color: var(--text-main);
+            color: var(--text-white);
         }
 
         .brand-logo .lab {
-            font-weight: 800;
+            font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-weight: 700;
+            letter-spacing: 0.02em;
         }
 
         .brand-logo .num {
+            font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             font-weight: 400;
-            color: var(--primary-White);
+            letter-spacing: 0.02em;
+            color: var(--text-white);
         }
-		
+
+        footer .lab {
+            font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            color: var(--text-white);
+        }
+
+        footer .num {
+            font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-weight: 400;
+            letter-spacing: 0.02em;
+            color: var(--text-white);
+        }
+
         .markdown-body blockquote {
             border-left: 4px solid var(--accent-blue);
             background: var(--surface-dark);
@@ -211,13 +253,17 @@
 </head>
 <body>
 
+    <video autoplay muted loop playsinline preload="auto" class="video-bg">
+        <source src="assets/img/background.mp4" type="video/mp4">
+    </video>
+    <div class="overlay"></div>
+
     <nav class="top-nav">
            <a href="index.html" class="brand-logo">
                 <span class="lab">LAB</span><span class="num">59</span>
             </a>
         <div class="nav-links">
             <a href="index.html#about">About</a>
-            <a href="index.html#frameworks">Frameworks</a>
             <a href="blog.html" style="color: var(--accent-blue);">Insights</a>
         </div>
     </nav>
@@ -228,11 +274,10 @@
         </div>
     </main>
 
-    <footer>
-        <div>&copy; 2026 LAB59. Built in Brisbane.</div>
-        <div>
-            <a href="blueprint.html">Blueprint</a> | 
-            <a href="mailto:gary@lab59.com.au">Contact</a>
+   <footer>
+        <div class="container footer-inner">
+            <div>&copy; 2026 <span class="lab">LAB</span><span class="num">59</span>. Built in Brisbane, Queensland.</div>
+            <div>Simple, effective marketing for local Brisbane businesses.</div>
         </div>
     </footer>
 
