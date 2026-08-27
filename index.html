@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LAB59 | Simple, effective marketing partnerships for Brisbane businesses.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600&display=swap" rel="stylesheet">
     <style>
         /* Modern CSS Reset & Variable System */
         :root {
@@ -260,6 +263,96 @@
             line-height: 1.6;
         }
 
+        /* Real Work / Case Studies */
+        .work-list {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .work-story {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 40px;
+        }
+
+        .work-eyebrow {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .work-name {
+            font-family: "Fraunces", var(--font-stack);
+            font-weight: 600;
+            font-size: 1.4rem;
+            letter-spacing: -0.01em;
+        }
+
+        .work-type {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .work-story p {
+            color: var(--text-muted);
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 18px;
+        }
+
+        .work-story p:last-of-type {
+            margin-bottom: 0;
+        }
+
+        .work-quote {
+            border-left: 3px solid var(--primary-blue);
+            padding: 4px 0 4px 20px;
+            margin: 24px 0;
+        }
+
+        .work-quote p {
+            color: var(--text-main);
+            font-size: 1.1rem;
+            font-weight: 600;
+            line-height: 1.5;
+            margin-bottom: 0;
+        }
+
+        .work-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-top: 20px;
+        }
+
+        .work-link:hover {
+            color: #4d79ff;
+        }
+
+        /* Per-client accent overrides — nod to their brand, everything else stays on-system */
+        .work-story[data-accent="common-ground"] .work-quote { border-left-color: #A6503A; }
+        .work-story[data-accent="common-ground"] .work-link { color: #A6503A; }
+        .work-story[data-accent="common-ground"] .work-link:hover { color: #c15f43; }
+        .work-story[data-accent="common-ground"] .work-type { color: #A6503A; }
+        .work-story[data-accent="common-ground"] .work-name { color: #c47b64; }
+
+        .work-story[data-accent="giggles"] .work-quote { border-left-color: #E1529D; }
+        .work-story[data-accent="giggles"] .work-link { color: #E1529D; }
+        .work-story[data-accent="giggles"] .work-link:hover { color: #ea77b3; }
+        .work-story[data-accent="giggles"] .work-type { color: #E1529D; }
+        .work-story[data-accent="giggles"] .work-name { color: #ef8fbc; }
+
         /* Practical Offerings / Capabilities */
         .offerings-list {
             display: flex;
@@ -418,6 +511,37 @@
             <p style="color: var(--text-muted); font-size: 1.05rem; margin-bottom: 0;">
                 LAB59 is new. Rather than charge full rates before the model's proven, I'm partnering with a small number of the right Brisbane operators and building at cost. You get a proper foundation for close to nothing, I get a real result I can point to. No inflated "founding member" pricing tricks, just an honest trade while I'm getting started.
             </p>
+        </section>
+
+        <section class="section">
+            <div class="section-tag">Real Work</div>
+            <h2 class="section-title">Two businesses, two different problems.</h2>
+
+            <div class="work-list">
+                <div class="work-story" data-accent="giggles">
+                    <div class="work-eyebrow">
+                        <span class="work-name">Giggles Photography</span>
+                        <span class="work-type">Pop-Up Portrait Studio</span>
+                    </div>
+                    <p>Giggles is a pop-up portrait studio, no fixed shopfront, no fixed address. Where they show up changes week to week, which means the one constant a customer can rely on is their online presence. When their GoDaddy subscription lapsed, that constant disappeared.</p>
+                    <p>What they needed wasn't complicated. A site that actually looked like Giggles, not a generic template, and one that pointed people to where the business really lives day to day: Instagram and Facebook, where bookings happen and where the studio's personality actually comes through. A pop-up studio doesn't need a website to do the selling. It needs a website that gets people to the right place and gets out of the way.</p>
+                    <p>That's what LAB59 built. A site that reflects the brand properly and sends visitors straight to the socials Giggles already uses to connect with families, check the pop-up's current location, and book a session.</p>
+                    <a href="https://gigglesphotography.com.au" target="_blank" rel="noopener" class="work-link">Visit gigglesphotography.com.au &rarr;</a>
+                </div>
+
+                <div class="work-story" data-accent="common-ground">
+                    <div class="work-eyebrow">
+                        <span class="work-name">Common Ground Maintenance</span>
+                        <span class="work-type">Grounds &amp; Maintenance</span>
+                    </div>
+                    <p>Websites don't stay important for the same reasons forever, and Garth's is a good example of that.</p>
+                    <p>When Common Ground was still building its name, the website mattered. Garth used the WordPress blog to show his knowledge, share results, and prove he could deliver, exactly what a growing business needs when it's still earning trust. It worked. Years of consistent, good work followed, and Common Ground built the kind of loyal client base most businesses spend a career chasing.</p>
+                    <p>Somewhere along the way, a plugin issue broke the homepage, so visitors landed on the blog instead of the front page. Garth never got around to fixing it. Not because he didn't care, but because the business had moved past needing the website to do that job. Referrals and reputation had taken over. He was now in the position of choosing which clients he took on, not looking for more. Meanwhile, he was still paying for hosting on a site that no longer reflected the business.</p>
+                    <p>What LAB59 built him reflects where Common Ground is now: a simple site that confirms the business is real and legitimate, without the cost or upkeep of something built for a different stage of growth.</p>
+                    <p>If he ever wants the blog back, the same site can do that too. A new post is a text file and a quick update to a list, nothing more. No login screen, no database, no plugin sitting there waiting to break the homepage again.</p>
+                    <a href="https://commonground.garytitmarsh.workers.dev/" target="_blank" rel="noopener" class="work-link">Visit Common Ground Maintenance &rarr;</a>
+                </div>
+            </div>
         </section>
 
         <section class="cta-banner">
