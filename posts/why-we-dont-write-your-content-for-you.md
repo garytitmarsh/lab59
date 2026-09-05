@@ -1,34 +1,25 @@
-# Why Your Website Doesn't Need to Do Everything
+# Why We Don't Write Your Content For You
 
 *By Gary Titmarsh*
 
-When I was working at a Brisbane marketing agency, I watched businesses get sold content calendars. Programmatic, generic, posted on schedule because consistency was supposed to drive algorithmic visibility. A lot of it was vanity work, updating a client's LinkedIn on their behalf, a branded post for Father's Day, another for some awareness day nobody in the business cared about. It generated clicks and views, but did it directly result in what mattered. Business through the door.
+At the agency I used to work for, a big part of the job was producing content for clients. Photos, captions, blog posts, all written and shot by people who'd never actually worked in the client's business. Polished, on-brand, and often completely hollow.
 
-Most of this process was for the agency's benefit, not the client's. More features meant a bigger invoice and a longer build. It didn't necessarily mean more customers.
+Customers can tell. Not always consciously, but they can tell when a photo is stock, when a caption reads like it was written by a template, when a testimonial sounds like marketing copy instead of an actual person's actual words.
 
-Here's the thing I kept seeing, and it's the reason LAB59 exists. For most small, owner-operated businesses, the website isn't where customers make their decision. It's where they go to check you're real before they call, message, or walk in. Someone searches for you, finds you on Google, and clicks through to your site mainly to confirm two things: are you legitimate, and do you do what they need.
+## What actually builds trust
 
-That's it. That's the job.
+For a small, owner-operated business, the most valuable thing you have isn't a slick brand voice. It's that you're a real person doing real work. A photo you took yourself of the job you just finished carries more weight than a professionally staged shot of someone else's. A short, plainly written line about what you did and why beats a paragraph of marketing language every time.
 
-## What a credibility check actually needs
+This is especially true for local businesses. People aren't hiring a brand, they're hiring a person or a small team, and they want to see that.
 
-A visitor deciding whether to trust you doesn't need a booking calendar. They need:
+## What this means for the work we do together
 
-- Your name, what you do, and who you do it for
-- Photos of real work, not stock images
-- A way to contact you that isn't buried
-- Some sign the business is current and active
+When we build your site or set up your Business Profile, we're not going to hand you a folder of stock photography and generic copy. We'll help you structure what you already have, your own photos, your own words, your own way of describing what you do, so it actually reads like you.
 
-If your site delivers that clearly in the first ten seconds, it's doing its job. Everything past that is optional at best, and a maintenance burden at worst.
+If your writing isn't polished, that's fine. Plain and honest beats polished and generic almost every time, especially for the kind of customer who's comparing you against three other local businesses and trying to work out who's actually going to show up and do a good job.
 
-## The cost of "doing more"
+## The trade-off, honestly
 
-Every extra feature on a website is something that can break, something that needs updating, and something you're paying for whether you use it or not. A contact form needs a working backend. A blog needs someone writing it. A booking system needs someone maintaining it when the plugin updates and the layout falls apart.
+This does mean more effort on your end. You'll need to send through a few photos, answer some direct questions about your business, and be willing to sound like yourself rather than a brochure. It's a small amount of upfront effort for something that reads as real, which is worth more than something that reads as professional but generic.
 
-For a solo tradesperson, a small studio, or a business under five people, none of that is a good trade. You didn't get into your trade to also run a piece of software.
-
-## What we build instead
-
-At LAB59 we build simple, static sites. One clear page, or a small handful, that say who you are and how to reach you. No database, no plugins, no login screen to forget the password to. It sits there, loads fast, and does the one job it needs to do.
-
-The heavy lifting for actually getting found happens somewhere else entirely, which is the next thing worth talking about.
+We'd rather build you something true than something impressive that could belong to anyone.
